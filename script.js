@@ -45,32 +45,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("prestige").addEventListener("click", () => {
     if (money >= 1000) {
-      fame += 1;
+      let fameEarned;
+      if (money <= 5000) {
+        fameEarned = money / 1000;
+      } else {
+        fameEarned = 5 + ((money - 5000) / 2000);
+      }
+      fame += fameEarned;
       money = 0;
       clerks = 0;
       adCampaigns = 0;
       comicConBooths = 0;
       saveGame();
       updateUI();
-      alert("You've gained 1 Fame! All progress reset, but you earn more money now.");
+      alert(`You've gained ${fameEarned.toFixed(2)} Fame! All progress reset, but you earn more money now.`);
     } else {
-      alert("You need $1000 to Prestige!");
+      alert("You need at least $1000 to Prestige!");
     }
   });
 
   function updateUI() {
-    document.getElementById("money").textContent = money;
+    document.getElementById("money").textContent = money.toFixed(0);
     document.getElementById("clerks").textContent = clerks;
     document.getElementById("ads").textContent = adCampaigns;
     document.getElementById("booths").textContent = comicConBooths;
-    document.getElementById("fame").textContent = fame;
+    document.getElementById("fame").textContent = fame.toFixed(2);
   }
 
   function autoSell() {
     let baseIncome = clerks + (comicConBooths * 5);
     let multiplier = (1 + 0.5 * adCampaigns) * (1 + 0.1 * fame);
     let income = baseIncome * multiplier;
-    money += Math.floor(income);
+    money += income;
     updateUI();
     saveGame();
   }
@@ -84,11 +90,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function loadGame() {
-    money = parseInt(localStorage.getItem("money")) || 0;
+    money = parseFloat(localStorage.getItem("money")) || 0;
     clerks = parseInt(localStorage.getItem("clerks")) || 0;
     adCampaigns = parseInt(localStorage.getItem("adCampaigns")) || 0;
     comicConBooths = parseInt(localStorage.getItem("comicConBooths")) || 0;
-    fame = parseInt(localStorage.getItem("fame")) || 0;
+    fame = parseFloat(localStorage.getItem("fame")) || 0;
     updateUI();
   }
 
