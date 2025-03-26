@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comic Book Tycoon</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game">
+    <h1>Comic Book Tycoon</h1>
+    <div id="store">
+      <img src="comic.png" id="comic" alt="Comic Book" />
+      <p>Click the comic to sell it!</p>
+    </div>
+    <div id="stats">
+      <p>Money: $<span id="money">0</span></p>
+      <button id="buyClerk">Hire Clerk ($50)</button>
+      <p>Clerks: <span id="clerks">0</span></p>
+    </div>
+  </div>
+  <audio id="clickSound" src="click.wav" preload="auto"></audio>
+  <audio id="cashSound" src="cash.wav" preload="auto"></audio>
+  <script src="script.js"></script>
+</body>
+</html>
