@@ -22,7 +22,8 @@ h1 {
 }
 
 #comic {
-  width: 120px;
+  width: 40vw;
+  max-width: 150px;
   cursor: pointer;
   image-rendering: pixelated;
   margin-top: 10px;
@@ -39,8 +40,19 @@ button {
   border-radius: 5px;
   cursor: pointer;
   box-shadow: 2px 2px #c0392b;
+  width: 90%;
+  max-width: 300px;
 }
 
 button:hover {
   background-color: #c0392b;
+}
+
+.flash {
+  animation: flashEffect 0.2s ease-in-out;
+}
+
+@keyframes flashEffect {
+  0% { color: yellow; transform: scale(1.2); }
+  100% { color: white; transform: scale(1); }
 }

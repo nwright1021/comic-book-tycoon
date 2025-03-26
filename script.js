@@ -4,15 +4,22 @@ document.addEventListener("DOMContentLoaded", () => {
   let adCampaigns = 0;
   let comicConBooths = 0;
   let fame = 0;
+  let soundEnabled = true;
 
-  let clickSound = document.getElementById("clickSound");
-  let cashSound = document.getElementById("cashSound");
+  const clickSound = document.getElementById("clickSound");
+  const cashSound = document.getElementById("cashSound");
 
-  document.getElementById("comic").addEventListener("click", () => {
+  const comic = document.getElementById("comic");
+  const toggleSoundBtn = document.getElementById("toggleSound");
+
+  comic.addEventListener("click", () => {
     money++;
-    clickSound.play();
+    if (soundEnabled) {
+      clickSound.play();
+      cashSound.play();
+    }
+    animateMoney();
     updateUI();
-    cashSound.play();
     saveGame();
   });
 
@@ -63,6 +70,19 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("You need at least $1000 to Prestige!");
     }
   });
+
+  toggleSoundBtn.addEventListener("click", () => {
+    soundEnabled = !soundEnabled;
+    toggleSoundBtn.textContent = soundEnabled ? "Sound: ON" : "Sound: OFF";
+  });
+
+  function animateMoney() {
+    const moneyDisplay = document.getElementById("money");
+    moneyDisplay.classList.add("flash");
+    setTimeout(() => {
+      moneyDisplay.classList.remove("flash");
+    }, 200);
+  }
 
   function updateUI() {
     document.getElementById("money").textContent = money.toFixed(0);
